@@ -1,9 +1,12 @@
-import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart'; // Keep this if needed elsewhere or for status fallback
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/daily_problem_card.dart';
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/feature_card.dart';
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/upcoming_events_card.dart';
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/welcome_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import '../widgets/common_app_bar.dart';
-import '../widgets/app_drawer.dart'; // Ensure AppDrawer widget is correctly imported
+import '../widgets/app_drawer.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -16,16 +19,13 @@ class HomePage extends StatelessWidget {
             if (state is UserLoaded) {
               return CommonAppBar(
                 notificationCount: 3,
-                profileImageUrl:
-                    'https://example.com/profile.jpg', // Replace with actual image URL if available in state
+                profileImageUrl: 'https://example.com/profile.jpg',
                 onMenuPressed: () => Scaffold.of(context).openDrawer(),
               );
             }
-            // Provide a default AppBar during loading or error states
             return AppBar(
               title: Text("Loading..."),
               leading: IconButton(
-                // Add a dummy leading icon if needed before drawer is ready
                 icon: Icon(Icons.menu),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
@@ -33,102 +33,65 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      // ****** CORRECTION IS HERE ******
       drawer: BlocBuilder<UserBloc, UserState>(
-        // Use UserBloc here
         builder: (context, state) {
           if (state is UserLoaded) {
-            // Ensure UserLoaded state has both name and accountStatus
-            // If UserLoaded doesn't have accountStatus, you'll need to modify UserBloc
-            // or find another way to get it (e.g., from SharedPreferences or LoginBloc if its state persists)
             debugPrint(
-              "Drawer - Displaying Name: ${state.name}, Account Status: ${state.accountStatus}", // Make sure state.accountStatus exists!
+              "Drawer - Displaying Name: ${state.name}, Account Status: ${state.accountStatus}",
             );
             return AppDrawer(
               userName: state.name,
-              accountStatus:
-                  state.accountStatus, // Make sure state.accountStatus exists!
+              accountStatus: state.accountStatus,
             );
           } else {
-            // Provide a default/loading drawer state
-            return AppDrawer(
-              userName:
-                  "Loading...", // Or "Guest" if appropriate for initial/error state
-              accountStatus: "...",
-            );
+            return AppDrawer(userName: "Loading...", accountStatus: "...");
           }
         },
       ),
-      // ****** END OF CORRECTION ******
-      body: Center(
-        child: BlocBuilder<UserBloc, UserState>(
-          builder: (context, state) {
-            if (state is UserLoading) {
-              return CircularProgressIndicator();
-            } else if (state is UserLoaded) {
-              debugPrint("HomePage Body - Displaying Name: ${state.name}");
-              return Text(
-                "Welcome, ${state.name}!",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              );
-            } else if (state is UserError) {
-              return Text(
+
+      backgroundColor: Colors.white,
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is UserLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is UserLoaded) {
+            return ListView(
+              children: [
+                WelcomeCard(
+                  quote:
+                      "You do not read a book for the book's sake, but for your own.",
+                  author: "Earl Nightingale",
+                  username: state.name,
+                  onProblemsPressed: () => print("Problems button pressed!"),
+                ),
+                SizedBox(height: 16),
+                DailyProblemCard(
+                  problemTitle: "Number of Good Leaf Nodes Pairs",
+                  difficulty: "Medium",
+                  category: "Tree, Depth-First Search, Binary Tree",
+                  solvedCount: 158,
+                  onSolvePressed: () => print("Solving problem..."),
+                  onUpvotePressed: () => print("Upvoted!"),
+                  onDownvotePressed: () => print("Downvoted!"),
+                ),
+                SizedBox(height: 16),
+                FeatureCard(), // ✅ Adds mission card
+                SizedBox(height: 16),
+                UpcomingEventsCard(), // ✅ Adds event section
+                SizedBox(height: 16),
+              ],
+            );
+          } else if (state is UserError) {
+            return Center(
+              child: Text(
                 "Error: ${state.message}",
                 style: TextStyle(color: Colors.red),
-              );
-            }
-            // Initial state or other states
-            return Text("Loading user data...");
-          },
-        ),
+              ),
+            );
+          }
+          return Center(child: Text("Loading user data..."));
+        },
       ),
     );
   }
 }
-
-// Reminder: Your AppDrawer definition remains the same
-// import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-
-// class AppDrawer extends StatelessWidget {
-//   final String userName;
-//   final String accountStatus;
-
-//   const AppDrawer({
-//     super.key,
-//     required this.userName,
-//     required this.accountStatus,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Drawer(
-//        child: ListView(
-//         padding: EdgeInsets.zero,
-//         children: <Widget>[
-//            UserAccountsDrawerHeader(
-//              accountName: Text(userName), // Dynamic User Name
-//              accountEmail: Text(accountStatus),
-//              currentAccountPicture: CircleAvatar(child: Icon(Icons.person)),
-//              decoration: BoxDecoration(color: Colors.green),
-//            ),
-//            // ... other ListTile items ...
-//             ListTile(
-//               leading: Icon(Icons.logout),
-//               title: Text('Logout'),
-//               onTap: () async {
-//                 SharedPreferences prefs = await SharedPreferences.getInstance();
-//                 await prefs.remove('username'); // Clear stored user (consider clearing other relevant data too)
-//                 // Optionally dispatch a Logout event to your Auth/Login Bloc
-//                 // context.read<LoginBloc>().add(LogoutEvent());
-//                 Navigator.pushReplacementNamed(
-//                   context,
-//                   '/login',
-//                 ); // Redirect to Login Page
-//               },
-//            ),
-//          ],
-//        ),
-//      );
-//    }
-// }
