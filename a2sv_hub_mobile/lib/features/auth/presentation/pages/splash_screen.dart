@@ -1,8 +1,6 @@
 import 'package:a2sv_hub_mobile/core/routes/app_routes.dart';
-import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
