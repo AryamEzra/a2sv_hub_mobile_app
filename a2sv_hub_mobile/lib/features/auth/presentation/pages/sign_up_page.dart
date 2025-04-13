@@ -1,19 +1,20 @@
-import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/bloc/signup_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   bool _obscurePassword = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 40.0),
 
               Text(
-                'Welcome Back!',
+                'Create Your Account',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 24.0,
@@ -56,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 8.0),
               Text(
-                'Please enter your credentials to continue.',
+                'Fill in the details below to sign up.',
                 style: GoogleFonts.poppins(
                   textStyle: const TextStyle(
                     fontSize: 16.0,
@@ -66,8 +67,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 32.0),
-
+              const SizedBox(height: 50.0),
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  hintText: 'Enter Your Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.grey[200],
+                ),
+              ),
+              const SizedBox(height: 16.0),
               TextField(
                 controller: emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -90,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                     controller: passwordController,
                     obscureText: _obscurePassword,
                     decoration: InputDecoration(
-                      hintText: 'Your Password',
+                      hintText: 'Create a Password',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: BorderSide.none,
@@ -114,30 +126,32 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 32.0),
 
               BlocProvider(
-                create: (context) => LoginBloc(),
-                child: BlocListener<LoginBloc, LoginState>(
+                create: (context) => SignUpBloc(),
+                child: BlocListener<SignUpBloc, SignUpState>(
                   listener: (context, state) {
-                    if (state is LoginFailure) {
+                    if (state is SignUpFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(state.message),
                           backgroundColor: Colors.red,
                         ),
                       );
-                    } else if (state is LoginSuccess) {
-                      Navigator.pushReplacementNamed(context, '/home');
+                    } else if (state is SignUpSuccess) {
+                      Navigator.pushReplacementNamed(context, '/login');
                     }
                   },
-                  child: BlocBuilder<LoginBloc, LoginState>(
+                  child: BlocBuilder<SignUpBloc, SignUpState>(
                     builder: (context, state) {
                       return Column(
                         children: [
-                          state is LoginLoading
+                          state is SignUpLoading
                               ? const CircularProgressIndicator()
                               : SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () {
+                                    final String name =
+                                        nameController.text.trim();
                                     final email = emailController.text.trim();
                                     final password =
                                         passwordController.text.trim();
@@ -170,14 +184,15 @@ class _LoginPageState extends State<LoginPage> {
                                       return;
                                     }
 
-                                    context.read<LoginBloc>().add(
-                                      LoginButtonPressed(
+                                    context.read<SignUpBloc>().add(
+                                      SignUpButtonPressed(
+                                        name: name,
                                         email: email,
                                         password: password,
                                       ),
                                     );
                                   },
-                                  child: const Text("Login"),
+                                  child: const Text("Sign Up"),
                                 ),
                               ),
                         ],
@@ -193,15 +208,15 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account?",
+                    "Already have an account?",
                     style: TextStyle(color: Colors.grey),
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/signup');
+                      Navigator.pushNamed(context, '/login');
                     },
                     child: const Text(
-                      'Sign Up',
+                      'Login',
                       style: TextStyle(
                         color: Colors.blue,
                         fontWeight: FontWeight.w600,

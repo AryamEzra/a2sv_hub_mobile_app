@@ -3,8 +3,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AppDrawer extends StatelessWidget {
   final String userName;
+  final String accountStatus;
 
-  const AppDrawer({super.key, required this.userName});
+  const AppDrawer({
+    super.key,
+    required this.userName,
+    required this.accountStatus,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +19,7 @@ class AppDrawer extends StatelessWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             accountName: Text(userName), // Dynamic User Name
-            accountEmail: Text('Student'),
+            accountEmail: Text(accountStatus),
             currentAccountPicture: CircleAvatar(child: Icon(Icons.person)),
             decoration: BoxDecoration(color: Colors.green),
           ),

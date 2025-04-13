@@ -1,7 +1,7 @@
 import 'package:a2sv_hub_mobile/features/user/domain/entities/user_entity.dart';
 import 'package:a2sv_hub_mobile/features/user/domain/repositories/user_repository.dart';
-import 'package:a2sv_hub_mobile/features/user/domain/use_cases/get_user_use_case.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,17 +35,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     emit(UserLoading());
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      final username = prefs.getString('username') ?? "Guest";
+      final name = prefs.getString('name') ?? "Guest"; // ✅ Retrieve name
+      final accountStatus =
+          prefs.getString('accountStatus') ?? "Student"; // ✅ Retrieve status
 
-      final mockUser = UserEntity(
-        id: 1,
-        name: username,
-        email: "guest@example.com",
-      );
+      debugPrint("UserBloc - Loaded Name: $name, Status: $accountStatus");
 
-      emit(UserLoaded(mockUser)); // Correctly emits a single user
+      emit(UserLoaded(name, accountStatus)); // ✅ Pass correct data
     } catch (e) {
-      emit(UserError(e.toString()));
+      emit(UserError("Failed to load user"));
     }
   }
 }

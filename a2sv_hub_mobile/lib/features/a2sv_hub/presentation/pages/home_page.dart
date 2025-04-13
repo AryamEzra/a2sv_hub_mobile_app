@@ -1,5 +1,5 @@
+import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:a2sv_hub_mobile/features/user/data/repositories/user_repository_impl.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import '../widgets/common_app_bar.dart';
@@ -24,12 +24,18 @@ class HomePage extends StatelessWidget {
           },
         ),
       ),
-      drawer: BlocBuilder<UserBloc, UserState>(
+      drawer: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          if (state is UserLoaded) {
-            return AppDrawer(userName: state.user.name);
+          if (state is LoginSuccess) {
+            debugPrint(
+              "Displaying Name: ${state.name}, Account Status: ${state.accountStatus}",
+            );
+            return AppDrawer(
+              userName: state.name,
+              accountStatus: state.accountStatus,
+            ); // ✅ Pass both values
           }
-          return AppDrawer(userName: "Guest");
+          return AppDrawer(userName: "Guest", accountStatus: "Student");
         },
       ),
       body: Center(
@@ -38,9 +44,16 @@ class HomePage extends StatelessWidget {
             if (state is UserLoading) {
               return CircularProgressIndicator();
             } else if (state is UserLoaded) {
-              return Text("Welcome, ${state.user.name}!");
+              debugPrint("HomePage - Displaying Name: ${state.name}");
+              return Text(
+                "Welcome, ${state.name}!",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              );
             } else if (state is UserError) {
-              return Text("Error: ${state.message}");
+              return Text(
+                "Error: ${state.message}",
+                style: TextStyle(color: Colors.red),
+              );
             }
             return Text("Press the menu button to open the drawer.");
           },

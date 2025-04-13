@@ -1,3 +1,5 @@
+import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/bloc/signup_bloc.dart';
+import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,16 +15,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
+        BlocProvider<UserBloc>(
           create:
               (context) =>
                   UserBloc(UserRepositoryImpl())..add(LoadCurrentUser()),
         ),
-        // Add more BlocProviders here if needed
+        BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
+        BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.home,
+        initialRoute:
+            AppRoutes.splash, // Start with splash screen for better UX
         routes: AppRoutes.routes,
       ),
     );

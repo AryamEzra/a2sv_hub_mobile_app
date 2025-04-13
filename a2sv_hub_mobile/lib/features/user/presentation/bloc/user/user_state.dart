@@ -8,8 +8,10 @@ final class UserInitial extends UserState {}
 final class UserLoading extends UserState {}
 
 final class UserLoaded extends UserState {
-  final UserEntity user;
-  UserLoaded(this.user);
+  final String name;
+  final String accountStatus;
+
+  UserLoaded(this.name, this.accountStatus);
 }
 
 final class UserLoadedList extends UserState {
