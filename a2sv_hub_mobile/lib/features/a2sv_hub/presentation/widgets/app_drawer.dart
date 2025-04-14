@@ -26,7 +26,10 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.home),
             title: Text('Home'),
-            onTap: () => Navigator.pushReplacementNamed(context, '/home'),
+            onTap: () {
+              Navigator.pop(context); // ✅ Closes drawer before navigating
+              Navigator.pushReplacementNamed(context, '/home');
+            },
           ),
           ListTile(
             leading: Icon(Icons.view_list),
@@ -36,10 +39,7 @@ class AppDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.lightbulb_outline),
             title: Text('Problems'),
-            onTap: () {
-              print("Problems selected");
-              Navigator.pop(context);
-            },
+            onTap: () => Navigator.pushReplacementNamed(context, '/problems'),
           ),
           ListTile(
             leading: Icon(Icons.map),

@@ -1,0 +1,30 @@
+[
+    {
+      "id": "001",
+      "name": "Cyclic Components",
+      "difficulty": "Medium",
+      "tags": ["DFS", "Graph"],
+      "solvedCount": 10,
+      "added": "1 hour ago",
+      "votes": 4
+    },
+    {
+      "id": "002",
+      "name": "E - Coins",
+      "difficulty": "Hard",
+      "tags": ["Contest", "DP"],
+      "solvedCount": 50,
+      "added": "1 day ago",
+      "votes": 15
+    },
+    {
+      "id": "003",
+      "name": "Number of Good Leaf Nodes Pairs",
+      "difficulty": "Medium",
+      "tags": ["Tree", "DFS", "Binary Tree"],
+      "solvedCount": 158,
+      "added": "Today",
+      "votes": 32
+    }
+  ]
+  

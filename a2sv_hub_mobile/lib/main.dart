@@ -1,3 +1,4 @@
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/bloc/bloc/problems_bloc.dart';
 import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/bloc/signup_bloc.dart';
 import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
           create:
               (context) =>
                   UserBloc(UserRepositoryImpl())..add(LoadCurrentUser()),
+        ),
+        BlocProvider<ProblemsBloc>(
+          create: (context) => ProblemsBloc()..add(FetchProblems()),
         ),
         BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
         BlocProvider<SignUpBloc>(create: (context) => SignUpBloc()),

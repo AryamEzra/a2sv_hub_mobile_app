@@ -1,3 +1,4 @@
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/pages/problem_page.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/pages/tracks_page.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/progress_card.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/stats_card.dart';
@@ -15,6 +16,7 @@ class AppRoutes {
   static const String tracks = '/tracks';
   static const String trackDetails = '/trackDetails';
   static const String statsDetails = '/statsDetails';
+  static const String problems = '/problems';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     splash: (context) => SplashScreen(),
@@ -24,5 +26,6 @@ class AppRoutes {
     tracks: (context) => TracksPage(),
     trackDetails: (context) => ProgressCard(),
     statsDetails: (context) => StatsCard(),
+    problems: (context) => ProblemsPage(),
   };
 }
