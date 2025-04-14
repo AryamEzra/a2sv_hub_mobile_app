@@ -9,6 +9,7 @@ class Problem {
   final int solvedCount;
   final String added;
   final int votes;
+  final String link;
 
   Problem({
     required this.id,
@@ -18,6 +19,7 @@ class Problem {
     required this.solvedCount,
     required this.added,
     required this.votes,
+    required this.link,
   });
 
   factory Problem.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class Problem {
       solvedCount: json['solvedCount'],
       added: json['added'],
       votes: json['votes'],
+      link: json['link'],
     );
   }
 
@@ -50,6 +53,7 @@ class Problem {
       solvedCount: solvedCount,
       added: added,
       votes: votes ?? this.votes,
+      link: link,
     );
   }
 }

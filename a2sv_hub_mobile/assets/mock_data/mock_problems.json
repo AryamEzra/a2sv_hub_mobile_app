@@ -6,7 +6,8 @@
       "tags": ["DFS", "Graph"],
       "solvedCount": 10,
       "added": "1 hour ago",
-      "votes": 4
+      "votes": 4,
+      "link": "https://example.com/problem1"
     },
     {
       "id": "002",
@@ -15,7 +16,8 @@
       "tags": ["Contest", "DP"],
       "solvedCount": 50,
       "added": "1 day ago",
-      "votes": 15
+      "votes": 15,
+      "link": "https://example.com/problem1"
     },
     {
       "id": "003",
@@ -24,7 +26,18 @@
       "tags": ["Tree", "DFS", "Binary Tree"],
       "solvedCount": 158,
       "added": "Today",
-      "votes": 32
-    }
+      "votes": 32,
+      "link": "https://example.com/problem1"
+    },
+    {
+        "id": "004",
+        "name": "Two Sum",
+        "difficulty": "Easy",
+        "tags": ["Array", "Hash Table"],
+        "solvedCount": 300,
+        "added": "Today",
+        "votes": 100,
+        "link": "https://example.com/problem1"
+      }
   ]
   
