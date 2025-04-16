@@ -43,6 +43,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               },
           tooltip: "Search", // Accessibility
         ),
+        const SizedBox(width: 133),
         IconButton(
           icon: const Icon(Icons.auto_awesome, color: Colors.orangeAccent),
           onPressed:

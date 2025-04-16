@@ -1,0 +1,66 @@
+
+[
+    {
+      "id": "001",
+      "name": "Graph Theory",
+      "difficulty": "Hard",
+      "progress": 60,
+      "totalProblems": 200,
+      "solvedProblems": 120,
+      "availableProblems": 80
+    },
+    {
+      "id": "002",
+      "name": "Dynamic Programming",
+      "difficulty": "Hard",
+      "progress": 40,
+      "totalProblems": 180,
+      "solvedProblems": 72,
+      "availableProblems": 108
+    },
+    {
+      "id": "003",
+      "name": "Data Structures",
+      "difficulty": "Medium",
+      "progress": 75,
+      "totalProblems": 150,
+      "solvedProblems": 112,
+      "availableProblems": 38
+    },
+    {
+      "id": "004",
+      "name": "Algorithms Basics",
+      "difficulty": "Easy",
+      "progress": 90,
+      "totalProblems": 100,
+      "solvedProblems": 90,
+      "availableProblems": 10
+    },
+    {
+      "id": "005",
+      "name": "Number Theory",
+      "difficulty": "Medium",
+      "progress": 30,
+      "totalProblems": 120,
+      "solvedProblems": 36,
+      "availableProblems": 84
+    },
+    {
+      "id": "006",
+      "name": "String Algorithms",
+      "difficulty": "Hard",
+      "progress": 55,
+      "totalProblems": 160,
+      "solvedProblems": 88,
+      "availableProblems": 72
+    },
+    {
+      "id": "007",
+      "name": "Geometry",
+      "difficulty": "Medium",
+      "progress": 20,
+      "totalProblems": 90,
+      "solvedProblems": 18,
+      "availableProblems": 72
+    }
+  ]

@@ -1,3 +1,4 @@
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/pages/problem_page.dart';
 import 'package:flutter/material.dart';
 
 // --- Colors ---
@@ -290,7 +291,12 @@ class ProgressCard extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            print("Problems button pressed");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProblemsPage(),
+              ), // Navigate to ProblemsPage
+            );
           },
           child: const Text("Problems"),
         ),

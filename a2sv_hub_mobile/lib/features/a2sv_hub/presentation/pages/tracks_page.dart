@@ -1,5 +1,4 @@
 // tracks_page.dart
-import 'package:a2sv_hub_mobile/core/routes/app_routes.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/app_drawer.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/common_app_bar.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/progress_card.dart';
@@ -90,27 +89,11 @@ class _TracksPageState extends State<TracksPage> {
           const SizedBox(height: 20.0),
 
           // Add Navigation to Progress Card
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                AppRoutes.trackDetails,
-              ); // ✅ Use AppRoutes
-            },
-            child: const ProgressCard(),
-          ),
+          ProgressCard(),
           const SizedBox(height: 16.0),
 
           // Add Navigation to Stats Card
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                AppRoutes.statsDetails,
-              ); // ✅ Use AppRoutes
-            },
-            child: const StatsCard(),
-          ),
+          StatsCard(),
         ],
       ),
     );
