@@ -24,11 +24,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           prefs.getString('accountStatus') ??
           "Student"; // ✅ Get stored account status
 
+      final email = prefs.getString('username');
       debugPrint("Retrieved Name After Login: $name");
       debugPrint("Retrieved Account Status After Login: $accountStatus");
 
       if (name != null) {
-        emit(LoginSuccess(name, accountStatus)); // ✅ Pass both name & status
+        emit(
+          LoginSuccess(name, accountStatus, email!),
+        ); // ✅ Pass both name & status
       } else {
         emit(LoginFailure("Login failed: Name not found"));
       }

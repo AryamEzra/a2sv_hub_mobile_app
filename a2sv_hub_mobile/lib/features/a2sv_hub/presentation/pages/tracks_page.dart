@@ -46,13 +46,7 @@ class _TracksPageState extends State<TracksPage> {
     return Scaffold(
       // Replace the old AppBar definition with the new widget
       appBar: CommonAppBar(
-        notificationCount: notificationCount, // Pass the data
         profileImageUrl: profileImageUrl, // Pass the data
-        onMenuPressed: _handleMenuPress, // Pass the callback function
-        onSearchPressed: _handleSearchPress, // Pass the callback function
-        onSparklePressed: _handleSparklePress,
-        onNotificationPressed: _handleNotificationPress,
-        // Pass other callbacks if defined
       ),
       drawer: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {

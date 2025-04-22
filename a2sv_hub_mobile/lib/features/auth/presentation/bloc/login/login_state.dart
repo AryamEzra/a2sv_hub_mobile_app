@@ -14,8 +14,9 @@ final class LoginLoading extends LoginState {}
 final class LoginSuccess extends LoginState {
   final String name;
   final String accountStatus;
+  final String email;
 
-  LoginSuccess(this.name, this.accountStatus);
+  LoginSuccess(this.name, this.accountStatus, this.email);
 }
 
 final class LoginFailure extends LoginState {

@@ -1,5 +1,5 @@
-import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/bloc/bloc/problems_bloc.dart';
-import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/bloc/signup_bloc.dart';
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/bloc/problems/problems_bloc.dart';
+import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/signup/signup_bloc.dart';
 import 'package:a2sv_hub_mobile/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
 import 'package:flutter/material.dart';

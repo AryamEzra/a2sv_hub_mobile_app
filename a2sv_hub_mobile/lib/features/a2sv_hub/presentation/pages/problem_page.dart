@@ -1,5 +1,5 @@
 import 'package:a2sv_hub_mobile/features/a2sv_hub/domain/entities/problem.dart';
-import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/bloc/bloc/problems_bloc.dart';
+import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/bloc/problems/problems_bloc.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/problem_tiles.dart';
 import 'package:a2sv_hub_mobile/features/a2sv_hub/presentation/widgets/problem_tool_bar.dart';
 import 'package:a2sv_hub_mobile/features/user/presentation/bloc/user/user_bloc.dart';
@@ -28,14 +28,7 @@ class _ProblemsPageState extends State<ProblemsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(
-        notificationCount: 5,
-        profileImageUrl: "https://via.placeholder.com/150",
-        onMenuPressed: () => Scaffold.of(context).openDrawer(),
-        onSearchPressed: () => print("Search pressed"),
-        onSparklePressed: () => print("Sparkle pressed"),
-        onNotificationPressed: () => print("Notification pressed"),
-      ),
+      appBar: CommonAppBar(profileImageUrl: "https://via.placeholder.com/150"),
 
       drawer: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {

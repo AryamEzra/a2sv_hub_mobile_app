@@ -18,9 +18,7 @@ class HomePage extends StatelessWidget {
           builder: (context, state) {
             if (state is UserLoaded) {
               return CommonAppBar(
-                notificationCount: 3,
                 profileImageUrl: 'https://example.com/profile.jpg',
-                onMenuPressed: () => Scaffold.of(context).openDrawer(),
               );
             }
             return AppBar(
